@@ -50,6 +50,8 @@
 
 html {
     scroll-behavior: initial;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 body {
@@ -59,6 +61,11 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
     position: relative;
+    width: 100%;
+    touch-action: pan-y;
+    /* Disables horizontal gestures */
+    -webkit-text-size-adjust: 100%;
+    /* Prevents font resizing on orientation change */
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
