@@ -133,6 +133,7 @@ ul {
 /* Utility Classes */
 .gradient-text {
     background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     display: inline-block;
@@ -260,15 +261,14 @@ ul {
     height: 100vh;
     display: flex;
     align-items: center;
+    justify-content: center;
     position: relative;
-    padding: 0 10%;
-    /* More side padding */
+    padding: 0 2rem;
     overflow: hidden;
 }
 
 .hero-content {
     z-index: 2;
-    max-width: 600px;
 }
 
 .hero-subtitle {
