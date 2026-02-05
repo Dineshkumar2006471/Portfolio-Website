@@ -1,34 +1,92 @@
 import * as THREE from 'three';
-// We are using CDN for GSAP and Lenis in HTML, so they are global variables (window.gsap, window.Lenis)
-// But for Three.js using import map, we import it.
 
-// --- 1. Init Lenis (Smooth Scroll) ---
+// ═══════════════════════════════════════════════════════════════════════════
+// NEO-LIQUID VOID - Distorted Glass & Ink in Water Physics
+// ═══════════════════════════════════════════════════════════════════════════
+
+// --- 1. Lenis Smooth Scroll (Native Feel) ---
 const lenis = new Lenis({
-    duration: 1.2,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    duration: 0.6,
+    easing: (t) => 1 - Math.pow(1 - t, 3),
     direction: 'vertical',
     gestureDirection: 'vertical',
     smooth: true,
-    mouseMultiplier: 1,
+    mouseMultiplier: 2,
     smoothTouch: false,
     touchMultiplier: 2,
+    wheelMultiplier: 2,
 });
 
 function raf(time) {
     lenis.raf(time);
     requestAnimationFrame(raf);
 }
-
 requestAnimationFrame(raf);
 
-// --- 2. Custom Text Scramble Effect (GSAP Alternative) ---
+// --- 2. GSAP Registration ---
+gsap.registerPlugin(ScrollTrigger);
+
+// Sync GSAP with Lenis
+lenis.on('scroll', ScrollTrigger.update);
+gsap.ticker.add((time) => lenis.raf(time * 1000));
+gsap.ticker.lagSmoothing(0);
+
+// --- 3. Default Browser Cursor (Custom cursor disabled) ---
+// Using normal browser cursor for better usability
+
+// --- 4. Preloader with Liquid Animation ---
+const initLoader = () => {
+    const preloader = document.querySelector('.preloader');
+    const loaderText = preloader.querySelector('.loader-text');
+    const loaderSub = preloader.querySelector('.loader-sub');
+
+    const tl = gsap.timeline();
+
+    tl.to(loaderText, {
+        opacity: 1,
+        scale: 1.1,
+        duration: 0.8,
+        ease: 'power2.out'
+    })
+        .to(loaderSub, {
+            opacity: 1,
+            y: -10,
+            duration: 0.5,
+            ease: 'power2.out'
+        }, '-=0.3')
+        .to({}, { duration: 1 }) // Pause
+        .to(preloader, {
+            yPercent: -100,
+            duration: 1,
+            ease: 'power4.inOut',
+            onComplete: () => {
+                preloader.style.display = 'none';
+                initHeroAnimations();
+            }
+        });
+};
+
+// --- 5. Hero Animations (Simple & Stable) ---
+const initHeroAnimations = () => {
+    // Simple hero animations that stay visible
+    gsap.fromTo('.hero-title',
+        { y: 80, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1.5, ease: 'power4.out' }
+    );
+
+    gsap.fromTo('.hero-subtitle',
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1, delay: 0.3, ease: 'power3.out' }
+    );
+};
+
+// --- 6. Text Scramble Effect ---
 class TextScramble {
     constructor(el) {
         this.el = el;
         this.chars = '!<>-_\\/[]{}—=+*^?#________';
         this.update = this.update.bind(this);
     }
-
     setText(newText) {
         const oldText = this.el.innerText;
         const length = Math.max(oldText.length, newText.length);
@@ -46,7 +104,6 @@ class TextScramble {
         this.update();
         return promise;
     }
-
     update() {
         let output = '';
         let complete = 0;
@@ -57,7 +114,7 @@ class TextScramble {
                 output += to;
             } else if (this.frame >= start) {
                 if (!char || Math.random() < 0.28) {
-                    char = this.randomChar();
+                    char = this.chars[Math.floor(Math.random() * this.chars.length)];
                     this.queue[i].char = char;
                 }
                 output += `<span class="dud">${char}</span>`;
@@ -73,41 +130,26 @@ class TextScramble {
             this.frame++;
         }
     }
-
-    randomChar() {
-        return this.chars[Math.floor(Math.random() * this.chars.length)];
-    }
 }
 
-// Initialize Scramble on Hero Title
-const el = document.querySelector('.scramble-target');
-const fx = new TextScramble(el);
+const scrambleEl = document.querySelector('.scramble-target');
+if (scrambleEl) {
+    const fx = new TextScramble(scrambleEl);
+    let counter = 0;
+    const phrases = ['Dinesh Kumar', 'AI Engineer', 'Full Stack Developer'];
+    const next = () => {
+        fx.setText(phrases[counter]).then(() => setTimeout(next, 3500)); // Longer gap between transitions
+        counter = (counter + 1) % phrases.length;
+    };
+    setTimeout(next, 2000); // Start after 2 seconds
+}
 
-let counter = 0;
-const phrases = [
-    'Dinesh Kumar',
-    'AI Engineer',
-    'Full Stack Developer'
-];
-
-const next = () => {
-    fx.setText(phrases[counter]).then(() => {
-        setTimeout(next, 2000);
-    });
-    counter = (counter + 1) % phrases.length;
-};
-// Start the cycle
-setTimeout(next, 2000);
-
-
-// --- 3. Three.js Background (Digital Reality) ---
+// --- 7. Three.js Simple Particles (No Sphere) ---
 const initThreeJS = () => {
     const container = document.getElementById('canvas-container');
+    if (!container) return;
+
     const scene = new THREE.Scene();
-
-    // Fog for depth
-    scene.fog = new THREE.FogExp2(0x0a0a0a, 0.002);
-
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
 
@@ -115,62 +157,50 @@ const initThreeJS = () => {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     container.appendChild(renderer.domElement);
 
-    // Particles
-    const geometry = new THREE.BufferGeometry();
-    const count = 2000;
-    const posArray = new Float32Array(count * 3);
+    // Simple ambient particles only (no sphere)
+    const particlesGeometry = new THREE.BufferGeometry();
+    const particlesCount = 800;
+    const posArray = new Float32Array(particlesCount * 3);
 
-    // Create random particles in a donut/torus shape or sphere
-    for (let i = 0; i < count * 3; i++) {
-        posArray[i] = (Math.random() - 0.5) * 15; // Spread
+    for (let i = 0; i < particlesCount * 3; i++) {
+        posArray[i] = (Math.random() - 0.5) * 20;
     }
+    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
 
-    geometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-
-    const material = new THREE.PointsMaterial({
+    const particlesMaterial = new THREE.PointsMaterial({
         size: 0.02,
-        color: 0x00ff88,
+        color: 0x00FF88, // Green color
         transparent: true,
-        opacity: 0.8,
+        opacity: 0.5,
     });
 
-    const particlesMesh = new THREE.Points(geometry, material);
+    const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
     scene.add(particlesMesh);
-
-    // Floating Geometric Shape (Icosahedron) - REMOVED
-
 
     camera.position.z = 5;
 
-    // Mouse Interaction
-    let mouseX = 0;
-    let mouseY = 0;
+    let mouseX = 0, mouseY = 0;
 
-    window.addEventListener('mousemove', (event) => {
-        mouseX = event.clientX / window.innerWidth - 0.5;
-        mouseY = event.clientY / window.innerHeight - 0.5;
+    window.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+        mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
     });
 
-    // Animation Loop
     const animate = () => {
         requestAnimationFrame(animate);
 
-        // Rotation
+        // Slow particle rotation
+        particlesMesh.rotation.y += 0.0003;
+        particlesMesh.rotation.x += 0.0001;
 
-
-        particlesMesh.rotation.y = -mouseX * 0.5;
-        particlesMesh.rotation.x = -mouseY * 0.5;
-
-        // Parallax effect on camera
-        camera.position.x += (mouseX * 0.5 - camera.position.x) * 0.05;
-        camera.position.y += (-mouseY * 0.5 - camera.position.y) * 0.05;
+        // Subtle mouse influence
+        camera.position.x += (mouseX * 0.3 - camera.position.x) * 0.02;
+        camera.position.y += (-mouseY * 0.3 - camera.position.y) * 0.02;
 
         renderer.render(scene, camera);
     };
-
     animate();
 
-    // Resize
     window.addEventListener('resize', () => {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
@@ -180,43 +210,67 @@ const initThreeJS = () => {
 
 initThreeJS();
 
+// --- 8. Magnetic Hover Effect for Project Cards ---
+const projectCards = document.querySelectorAll('.project-card');
+projectCards.forEach(btn => {
+    btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
 
-// --- 4. GSAP Scroll Animations ---
-gsap.registerPlugin(ScrollTrigger);
+        gsap.to(btn, {
+            x: x * 0.15,
+            y: y * 0.15,
+            rotationY: x * 0.02,
+            rotationX: -y * 0.02,
+            duration: 0.5,
+            ease: 'power2.out'
+        });
+    });
 
-// Hero Reveal
-gsap.from('.hero-title', {
-    duration: 1.5,
-    y: 100,
-    opacity: 0,
-    ease: 'power4.out',
-    delay: 0.5
+    btn.addEventListener('mouseleave', () => {
+        gsap.to(btn, {
+            x: 0,
+            y: 0,
+            rotationY: 0,
+            rotationX: 0,
+            duration: 0.8,
+            ease: 'elastic.out(1, 0.3)'
+        });
+    });
 });
 
-gsap.from('.hero-description', {
-    duration: 1.5,
-    y: 50,
-    opacity: 0,
-    ease: 'power4.out',
-    delay: 0.8
-});
-
-gsap.from('.hero-buttons', {
-    duration: 1.5,
-    y: 50,
-    opacity: 0,
-    ease: 'power4.out',
-    delay: 1.0
-});
-
-// Reveal Text on Scroll (About Section)
+// --- 9. Scroll Animations ---
+// Reveal text
 gsap.utils.toArray('.reveal-text').forEach(text => {
-    gsap.from(text, {
+    gsap.to(text, {
         scrollTrigger: {
             trigger: text,
-            start: 'top 80%',
+            start: 'top 85%',
             toggleActions: 'play none none reverse'
         },
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: 'power3.out'
+    });
+});
+
+// Skill cards stagger
+gsap.from('.skill-card', {
+    scrollTrigger: { trigger: '.skills-grid', start: 'top 80%' },
+    y: 100,
+    opacity: 0,
+    rotationX: -30,
+    duration: 0.8,
+    stagger: 0.15,
+    ease: 'back.out(1.4)'
+});
+
+// Section headers
+gsap.utils.toArray('.section-header').forEach(header => {
+    gsap.from(header, {
+        scrollTrigger: { trigger: header, start: 'top 85%' },
         y: 50,
         opacity: 0,
         duration: 1,
@@ -224,43 +278,11 @@ gsap.utils.toArray('.reveal-text').forEach(text => {
     });
 });
 
-// Skill Cards Stagger
-gsap.from('.skill-card', {
-    scrollTrigger: {
-        trigger: '.skills-grid',
-        start: 'top 80%'
-    },
-    y: 100,
-    opacity: 0,
-    duration: 0.8,
-    stagger: 0.2, // 0.2s delay between each
-    ease: 'back.out(1.7)'
-});
-
-// Projects Parallax/Fade
-gsap.utils.toArray('.project-card').forEach((card, i) => {
-    gsap.from(card, {
-        scrollTrigger: {
-            trigger: card,
-            start: 'top 85%'
-        },
-        y: 100,
-        opacity: 0,
-        duration: 0.8,
-        delay: i * 0.1,
-        ease: 'power3.out'
-    });
-});
-
-// Counter Animation for Stats
+// Counter animation
 gsap.utils.toArray('.stat-number').forEach(stat => {
     const target = stat.getAttribute('data-target');
     gsap.to(stat, {
-        scrollTrigger: {
-            trigger: stat,
-            start: 'top 90%',
-            once: true
-        },
+        scrollTrigger: { trigger: stat, start: 'top 90%', once: true },
         innerHTML: target,
         duration: 2,
         snap: { innerHTML: 1 },
@@ -268,70 +290,38 @@ gsap.utils.toArray('.stat-number').forEach(stat => {
     });
 });
 
+// --- 10. Navigation Scroll State ---
+window.addEventListener('scroll', () => {
+    const nav = document.querySelector('.nav');
+    if (window.scrollY > 100) {
+        nav.classList.add('scrolled');
+    } else {
+        nav.classList.remove('scrolled');
+    }
+});
 
-// --- 5. Barba.js (Page Transitions) ---
-// Note: Barba really shines with multi-page. Since we are mostly anchor based here, 
-// we will just init it to allow for future multi-page support or smooth reloads.
-// If running locally without a server, Barba might throw CORS errors on file:// protocol.
-// We'll add a check.
-
-if (window.location.protocol !== 'file:') {
+// --- 11. Barba.js Page Transitions ---
+if (window.location.protocol !== 'file:' && typeof barba !== 'undefined') {
     barba.init({
         transitions: [{
-            name: 'opacity-transition',
+            name: 'liquid-transition',
             leave(data) {
                 return gsap.to(data.current.container, {
                     opacity: 0,
-                    duration: 0.5
+                    y: -50,
+                    duration: 0.6
                 });
             },
             enter(data) {
                 return gsap.from(data.next.container, {
                     opacity: 0,
-                    duration: 0.5
+                    y: 50,
+                    duration: 0.6
                 });
             }
         }]
     });
 }
 
-// Preloader Logic
-window.addEventListener('load', () => {
-    const preloader = document.querySelector('.preloader');
-    const text = preloader.querySelector('.loader-text');
-
-    const tl = gsap.timeline();
-
-    tl.to(text, {
-        opacity: 1,
-        duration: 0.5
-    })
-        .to(text, {
-            scale: 1.2,
-            duration: 1,
-            ease: 'power2.inOut'
-        })
-        .to(preloader, {
-            y: '-100%',
-            duration: 1,
-            ease: 'power4.inOut' // Cinematic sweep up
-        }, '-=0.2');
-});
-
-
-// Custom Cursor Logic
-const cursor = document.querySelector('.cursor');
-const cursorFollower = document.querySelector('.cursor-follower');
-
-document.addEventListener('mousemove', (e) => {
-    gsap.to(cursor, {
-        x: e.clientX,
-        y: e.clientY,
-        duration: 0.1
-    });
-    gsap.to(cursorFollower, {
-        x: e.clientX,
-        y: e.clientY,
-        duration: 0.3
-    });
-});
+// --- 12. Initialize ---
+window.addEventListener('load', initLoader);

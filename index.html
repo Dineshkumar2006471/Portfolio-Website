@@ -5,109 +5,84 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dk's Portfolio | Dinesh Kumar</title>
-    <meta name="description"
-        content="Premium 3D Portfolio of Dinesh Kumar, a Front-end Developer crafting beautiful digital experiences.">
-
-    <!-- Google Fonts -->
+    <meta name="description" content="Cinematic Portfolio of Dinesh Kumar - AI Engineer & Full Stack Developer.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
-
-    <!-- Three.js (for 3D) -->
-    <script type="importmap">
-        {
-            "imports": {
-                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
-            }
-        }
-    </script>
+    <script
+        type="importmap">{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"}}</script>
 </head>
 
 <body data-barba="wrapper">
+    <!-- Mesh Gradient Background -->
+    <div class="mesh-gradient"></div>
 
-    <!-- 3D Background Canvas -->
+    <!-- 3D Canvas - Liquid Sphere -->
     <div id="canvas-container"></div>
 
-    <!-- Cursor -->
-    <div class="cursor"></div>
-    <div class="cursor-follower"></div>
+
+
 
     <!-- Preloader -->
     <div class="preloader">
         <div class="loader-text">DK</div>
+        <div class="loader-sub">Loading Experience</div>
     </div>
 
     <!-- Navigation -->
     <nav class="nav">
-        <a href="#hero" class="nav-logo">Dk's portfolio</a>
+        <a href="#hero" class="nav-logo">DK.</a>
         <ul class="nav-links">
             <li><a href="#about" class="nav-link">About</a></li>
             <li><a href="#skills" class="nav-link">Skills</a></li>
             <li><a href="#projects" class="nav-link">Projects</a></li>
             <li><a href="#contact" class="nav-link">Contact</a></li>
         </ul>
-        <a href="assets/resume/Resume.pdf" class="nav-resume-btn" target="_blank" download>
-            Resume <i class="fas fa-download"></i>
-        </a>
+        <a href="assets/resume/Resume.pdf" class="nav-resume-btn" target="_blank" download>Resume <i
+                class="fas fa-download"></i></a>
     </nav>
 
     <main data-barba="container" data-barba-namespace="home">
-
         <!-- Hero Section -->
         <section id="hero" class="hero">
-            <div class="hero-content" style="width: 100%; text-align: center;">
-                <h1 class="hero-title"
-                    style="font-size: clamp(3rem, 8vw, 8rem); margin: 0; width: 100%; font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; letter-spacing: 0.05em;">
-                    <span class="gradient-text">WELCOME TO MY PORTFOLIO</span>
-                </h1>
+            <div class="hero-content">
+                <p class="hero-subtitle"><span class="scramble-target">Dinesh Kumar</span></p>
+                <h1 class="hero-title hero_heading"><span class="gradient-text">WELCOME TO MY PORTFOLIO</span></h1>
             </div>
         </section>
 
         <!-- About Section -->
         <section id="about" class="section about-section">
             <div class="container">
-                <div class="section-header" data-scroll data-scroll-speed="0.5">
-                    <span class="section-label">About Me</span>
+                <div class="section-header">
+                    <span class="section-label">01 — About Me</span>
                     <h2 class="section-title">Creating <span class="highlight">Digital</span> Experiences</h2>
                 </div>
-
                 <div class="about-grid">
-                    <div class="about-image-wrapper" data-scroll data-scroll-speed="1">
-                        <div class="about-image">
-                            <!-- Placeholder image or actual image path if available -->
-                            <img src="assets/images/me.jpg" alt="Dinesh Kumar" />
-                        </div>
+                    <div class="about-image-wrapper">
+                        <div class="about-image"><img src="assets/images/me.jpg" alt="Dinesh Kumar" /></div>
                     </div>
                     <div class="about-content">
                         <h2>Hello! I'm <span class="highlight">Dinesh</span></h2>
-                        <p class="reveal-text">
-                            A creative and enthusiastic web developer with a deep love for crafting beautiful,
-                            performant websites and applications. I enjoy building modern UIs, automating cloud
-                            deployments, and learning new technologies every day.
-                        </p>
-                        <p class="reveal-text">
-                            My journey started with curiosity about how websites work, and now I specialize in
-                            creating seamless user experiences with cutting-edge technologies.
-                        </p>
+                        <p class="reveal-text">A creative and enthusiastic web developer with a deep love for crafting
+                            beautiful, performant websites and applications. I enjoy building modern UIs, automating
+                            cloud deployments, and learning new technologies every day.</p>
+                        <p class="reveal-text">My journey started with curiosity about how websites work, and now I
+                            specialize in creating seamless user experiences with cutting-edge technologies.</p>
                         <div class="about-stats">
-                            <div class="stat counter-item">
+                            <div class="stat">
                                 <div class="stat-number" data-target="10">0</div>
                                 <div class="stat-label">Projects</div>
                             </div>
-                            <div class="stat counter-item">
+                            <div class="stat">
                                 <div class="stat-number" data-target="5">0</div>
                                 <div class="stat-label">Technologies</div>
                             </div>
-                            <div class="stat counter-item">
+                            <div class="stat">
                                 <div class="stat-number" data-target="3">0</div>
                                 <div class="stat-label">Years Learning</div>
                             </div>
@@ -121,10 +96,9 @@
         <section id="skills" class="section skills-section">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-label">My Expertise</span>
+                    <span class="section-label">02 — My Expertise</span>
                     <h2 class="section-title">Skills & <span class="highlight">Technologies</span></h2>
                 </div>
-
                 <div class="skills-grid">
                     <div class="skill-card">
                         <div class="skill-card-icon">🎨</div>
@@ -133,13 +107,14 @@
                             <span class="skill-tag">React</span>
                             <span class="skill-tag">Next.js</span>
                             <span class="skill-tag">TypeScript</span>
-                            <span class="skill-tag">Tailwind CSS</span>
                             <span class="skill-tag">JavaScript</span>
-                            <span class="skill-tag">Webflow</span>
+                            <span class="skill-tag">HTML5</span>
+                            <span class="skill-tag">CSS3</span>
+                            <span class="skill-tag">Tailwind CSS</span>
                             <span class="skill-tag">GSAP</span>
+                            <span class="skill-tag">Webflow</span>
                         </div>
                     </div>
-
                     <div class="skill-card">
                         <div class="skill-card-icon">⚙️</div>
                         <h3>Backend Development</h3>
@@ -147,20 +122,25 @@
                             <span class="skill-tag">Node.js</span>
                             <span class="skill-tag">Express.js</span>
                             <span class="skill-tag">Python</span>
+                            <span class="skill-tag">FastAPI</span>
                             <span class="skill-tag">MongoDB</span>
                             <span class="skill-tag">PostgreSQL</span>
+                            <span class="skill-tag">Firebase</span>
+                            <span class="skill-tag">REST APIs</span>
                         </div>
                     </div>
-
                     <div class="skill-card">
                         <div class="skill-card-icon">🛠️</div>
                         <h3>Tools & DevOps</h3>
                         <div class="skill-tags">
                             <span class="skill-tag">Git</span>
+                            <span class="skill-tag">GitHub</span>
                             <span class="skill-tag">Docker</span>
                             <span class="skill-tag">AWS</span>
                             <span class="skill-tag">Netlify</span>
                             <span class="skill-tag">Vercel</span>
+                            <span class="skill-tag">VS Code</span>
+                            <span class="skill-tag">Figma</span>
                         </div>
                     </div>
                 </div>
@@ -171,140 +151,74 @@
         <section id="projects" class="section projects-section">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-label">Portfolio</span>
+                    <span class="section-label">03 — Portfolio</span>
                     <h2 class="section-title">Accomplished <span class="highlight">Works</span></h2>
                 </div>
-
                 <div class="projects-grid">
-                    <!-- Project 1 -->
                     <article class="project-card">
                         <div class="project-image">
-                            <div class="project-overlay">
-
-                            </div>
-                            <img src="assets/images/ss2.png" Project One">
+                            <div class="project-overlay"></div><img src="assets/images/ss2.png" alt="E-Commerce">
                         </div>
                         <div class="project-info">
                             <h3 class="project-title">E-Commerce Website</h3>
                             <p class="project-desc">Built a full-stack e-commerce website with a responsive,
-                                user-friendly interface to provide a
-                                seamless shopping
-                                experience.</p>
+                                user-friendly interface.</p>
                             <div class="project-tech">
-                                <span>Node.js</span>
-                                <span>Express.js</span>
-                                <span>Firebase</span>
-                                <span>EJS</span>
+                                <span>Node.js</span><span>Express.js</span><span>Firebase</span><span>EJS</span>
                             </div>
-                            <div class="project-actions">
-                                <a href="https://ecommerce-bd1bd.web.app/" target="_blank" class="project-action-btn">
-                                    <i class="fas fa-external-link-alt"></i> View Live
-                                </a>
-                                <a href="https://github.com/Dineshkumar2006471/ecommerce-website-buyhive"
-                                    target="_blank" class="project-action-btn">
-                                    <i class="fab fa-github"></i> GitHub
-                                </a>
+                            <div class="project-actions"><a href="https://ecommerce-bd1bd.web.app/" target="_blank"
+                                    class="project-action-btn"><i class="fas fa-external-link-alt"></i> Live</a><a
+                                    href="https://github.com/Dineshkumar2006471/ecommerce-website-buyhive"
+                                    target="_blank" class="project-action-btn"><i class="fab fa-github"></i> Code</a>
                             </div>
                         </div>
                     </article>
-
-                    <!-- Project 2 -->
                     <article class="project-card">
                         <div class="project-image">
-                            <div class="project-overlay">
-
-                            </div>
-                            <img src="assets/images/ss5.png" alt="Project Two">
+                            <div class="project-overlay"></div><img src="assets/images/ss5.png" alt="Docmate">
                         </div>
                         <div class="project-info">
                             <h3 class="project-title">Docmate</h3>
-                            <p class="project-desc">Docmate is a TypeScript-first web application that provides an
-                                AI-assisted, multilingual assistant
-                                for healthcare scenarios.</p>
+                            <p class="project-desc">AI-assisted, multilingual healthcare assistant application.</p>
                             <div class="project-tech">
-                                <span>React</span>
-                                <span>typescript</span>
-                                <span>Tailwind css</span>
-                                <span>firebase</span>
+                                <span>React</span><span>TypeScript</span><span>Tailwind</span><span>Firebase</span>
                             </div>
-                            <div class="project-actions">
-                                <a href="https://docmate-server.netlify.app/" target="_blank"
-                                    class="project-action-btn">
-                                    <i class="fas fa-external-link-alt"></i> View Live
-                                </a>
-                                <a href="https://github.com/Dineshkumar2006471/Docmate" target="_blank"
-                                    class="project-action-btn">
-                                    <i class="fab fa-github"></i> GitHub
-                                </a>
-                            </div>
+                            <div class="project-actions"><a href="https://docmate-server.netlify.app/" target="_blank"
+                                    class="project-action-btn"><i class="fas fa-external-link-alt"></i> Live</a><a
+                                    href="https://github.com/Dineshkumar2006471/Docmate" target="_blank"
+                                    class="project-action-btn"><i class="fab fa-github"></i> Code</a></div>
                         </div>
                     </article>
-
-
-
-                    <!-- Project 3-->
                     <article class="project-card">
                         <div class="project-image">
-                            <div class="project-overlay">
-
-                            </div>
-                            <img src="assets/images/ss4.png" alt="Project Three">
+                            <div class="project-overlay"></div><img src="assets/images/ss4.png" alt="AI-RootKit">
                         </div>
                         <div class="project-info">
-                            <h3 class="project-title">AI-RootKit Detection System</h3>
-                            <p class="project-desc">Built a kernel-level anomaly detection system using Python, FastAPI,
-                                and an ML model (Isolation
-                                Forest) to classify
-                                running processes as safe, suspicious, or malicious and trigger real-time alerts via
-                                email and
-                                dashboard visualizations.</p>
+                            <h3 class="project-title">AI-RootKit Detection</h3>
+                            <p class="project-desc">Kernel-level anomaly detection system using ML models.</p>
                             <div class="project-tech">
-                                <span>Python</span>
-                                <span>Fast API</span>
-                                <span>Firebase</span>
-                                <span>Isolation Forest</span>
+                                <span>Python</span><span>FastAPI</span><span>Firebase</span><span>ML</span>
                             </div>
-
-
-                            <div class="project-actions">
-                                <a href="" target="_blank" class="project-action-btn">
-                                    <i class="fas fa-external-link-alt"></i> View Live
-                                </a>
-                                <a href="https://github.com/Dineshkumar2006471/rootkit-demo" target="_blank"
-                                    class="project-action-btn">
-                                    <i class="fab fa-github"></i> GitHub
-                                </a>
-                            </div>
+                            <div class="project-actions"><a href="" target="_blank" class="project-action-btn"><i
+                                        class="fas fa-external-link-alt"></i> Live</a><a
+                                    href="https://github.com/Dineshkumar2006471/rootkit-demo" target="_blank"
+                                    class="project-action-btn"><i class="fab fa-github"></i> Code</a></div>
                         </div>
                     </article>
-
-                    <!-- Project 4 -->
                     <article class="project-card">
                         <div class="project-image">
-
-                            <img src="assets/images/ss6.png" alt="E-bus Navigator">
+                            <div class="project-overlay"></div><img src="assets/images/ss6.png" alt="E-bus">
                         </div>
                         <div class="project-info">
                             <h3 class="project-title">E-bus Navigator</h3>
-                            <p class="project-desc">E-Bus Navigator is a real-time bus tracking system that predicts
-                                accurate arrival times using advanced models based on bus location and stop duration.
-                                The platform reduces passenger wait times and anxiety while improving overall
-                                satisfaction with public transportation services.</p>
+                            <p class="project-desc">Real-time bus tracking system with accurate arrival predictions.</p>
                             <div class="project-tech">
-                                <span>React</span>
-                                <span>typescript</span>
-                                <span>Tailwind css</span>
-                                <span>firebase</span>
+                                <span>React</span><span>TypeScript</span><span>Tailwind</span><span>Firebase</span>
                             </div>
-                            <div class="project-actions">
-                                <a href="https://ebus-current-location.web.app/login.html" target="_blank"
-                                    class="project-action-btn">
-                                    <i class="fas fa-external-link-alt"></i> View Live
-                                </a>
-                                <a href="https://github.com/Dineshkumar2006471/ebus-current-location." target="_blank"
-                                    class="project-action-btn">
-                                    <i class="fab fa-github"></i> GitHub
-                                </a>
+                            <div class="project-actions"><a href="https://ebus-current-location.web.app/login.html"
+                                    target="_blank" class="project-action-btn"><i class="fas fa-external-link-alt"></i>
+                                    Live</a><a href="https://github.com/Dineshkumar2006471/ebus-current-location."
+                                    target="_blank" class="project-action-btn"><i class="fab fa-github"></i> Code</a>
                             </div>
                         </div>
                     </article>
@@ -316,57 +230,39 @@
         <section id="contact" class="section contact-section">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-label">Get in Touch</span>
+                    <span class="section-label">04 — Get in Touch</span>
                     <h2 class="section-title">Let's Work <span class="highlight">Together</span></h2>
                 </div>
-
                 <div class="contact-wrapper">
                     <div class="contact-info">
                         <h3>Contact Info</h3>
                         <p>Feel free to reach out for collaborations or just a friendly hello.</p>
-
-                        <div class="contact-detail">
-                            <i class="fas fa-envelope"></i>
-                            <a href="mailto:bingidineshkumar@gmail.com">bingidineshkumar@gmail.com</a>
-                        </div>
-                        <div class="contact-detail">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>India</span>
-                        </div>
-
+                        <div class="contact-detail"><i class="fas fa-envelope"></i><a
+                                href="mailto:bingidineshkumar@gmail.com">bingidineshkumar@gmail.com</a></div>
+                        <div class="contact-detail"><i class="fas fa-map-marker-alt"></i><span>India</span></div>
                         <div class="social-links">
                             <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
                             <a href="#" class="social-link"><i class="fab fa-github"></i></a>
                             <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
                         </div>
                     </div>
-
                     <form class="contact-form" action="mailto:bingidineshkumar@gmail.com" method="post"
                         enctype="text/plain">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" required placeholder="Your Name">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required placeholder="Your Email">
-                        </div>
-                        <div class="form-group">
-                            <label for="project">Project Type</label>
-                            <select id="project" name="project">
+                        <div class="form-group"><label for="name">Name</label><input type="text" id="name" name="name"
+                                required placeholder="Your Name"></div>
+                        <div class="form-group"><label for="email">Email</label><input type="email" id="email"
+                                name="email" required placeholder="Your Email"></div>
+                        <div class="form-group"><label for="project">Project Type</label><select id="project"
+                                name="project">
                                 <option value="web-dev">Web Development</option>
                                 <option value="ui-design">UI/UX Design</option>
                                 <option value="other">Other</option>
-                            </select>
+                            </select></div>
+                        <div class="form-group"><label for="message">Message</label><textarea id="message"
+                                name="message" rows="5" required placeholder="Tell me about your project..."></textarea>
                         </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="5" required
-                                placeholder="Tell me about your project..."></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary submit-btn">
-                            Send Message <i class="fas fa-paper-plane"></i>
-                        </button>
+                        <button type="submit" class="btn btn-primary">Send Message <i
+                                class="fas fa-paper-plane"></i></button>
                     </form>
                 </div>
             </div>
@@ -375,28 +271,19 @@
         <!-- Footer -->
         <footer class="footer">
             <div class="container footer-content">
-                <div class="footer-left">
-                    <span class="footer-logo">Dk.</span>
-                    <p>&copy; 2026 Dinesh Kumar. All rights reserved.</p>
+                <div class="footer-left"><span class="footer-logo">DK.</span>
+                    <p>&copy; 2026 Dinesh Kumar</p>
                 </div>
-                <div class="footer-right">
-                    <a href="#hero">Back to Top <i class="fas fa-arrow-up"></i></a>
-                </div>
+                <div class="footer-right"><a href="#hero">Back to Top <i class="fas fa-arrow-up"></i></a></div>
             </div>
         </footer>
-
     </main>
 
     <!-- Scripts -->
-    <!-- Lenis for Smooth Scroll -->
-    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
-    <!-- GSAP -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <!-- Barba.js -->
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/@barba/core"></script>
-
-    <!-- Custom Scripts -->
     <script type="module" src="script.js"></script>
 </body>
 
