@@ -204,6 +204,8 @@ body {
     letter-spacing: -0.05em;
     color: var(--accent-volt);
     text-transform: uppercase;
+    position: relative;
+    z-index: 101;
 }
 
 .nav-links {
@@ -268,6 +270,8 @@ body {
     display: flex;
     align-items: center;
     gap: 1.5rem;
+    position: relative;
+    z-index: 101;
 }
 
 .hamburger {
@@ -1033,19 +1037,41 @@ ul {
 
     .hero {
         padding: 6rem 1.5rem 3rem 1.5rem;
+        min-height: auto;
+        /* Allow content to dictate height on mobile if needed */
+        padding-top: 120px;
+        /* Space for fixed nav */
+    }
+
+    .hero-content {
+        padding-top: 2rem;
     }
 
     .skills-grid {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 
     .projects-grid {
         grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    .project-image {
+        height: 250px;
+        /* Slightly smaller on mobile */
     }
 
     .about-stats {
         flex-wrap: wrap;
         gap: 2rem;
+        justify-content: center;
+        /* Center stats on mobile */
+        text-align: center;
+    }
+
+    .stat {
+        min-width: 120px;
     }
 
     .contact-wrapper {
@@ -1064,12 +1090,90 @@ ul {
 
 @media (max-width: 480px) {
     .nav {
-        padding: 1rem;
+        padding: 1rem 1.5rem;
+        background: rgba(11, 14, 20, 0.9);
+        /* More solid background for visibility */
+        backdrop-filter: blur(15px);
+    }
+
+    .nav-logo {
+        font-size: 1.2rem;
+    }
+
+    .nav-resume-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.75rem;
+    }
+
+    /* Hero Text Adjustments */
+    .hero-title {
+        font-size: 2.5rem;
+        line-height: 1.1;
+    }
+
+    .hero-subtitle {
+        font-size: 0.9rem;
+    }
+
+    /* Section Headers */
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .section-label {
+        font-size: 0.7rem;
+        letter-spacing: 0.2em;
+    }
+
+    /* Contact Form on Mobile */
+    .contact-wrapper {
+        padding: 1.5rem;
+    }
+
+    /* Input Font Size 16px prevents iOS zoom */
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        font-size: 16px;
     }
 
     .footer-content {
         flex-direction: column;
-        gap: 1rem;
+        gap: 1.5rem;
         text-align: center;
+    }
+
+    .footer-left p {
+        margin-left: 0;
+        display: block;
+        margin-top: 0.5rem;
+    }
+
+    .footer-right {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 380px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .stat-number {
+        font-size: 2.5rem;
+    }
+
+    .project-title {
+        font-size: 1.3rem;
+    }
+
+    .nav {
+        padding: 0.8rem 1rem;
+    }
+
+    .nav-resume-btn {
+        display: none;
+        /* Hide resume button on very small screens to save space */
     }
 }

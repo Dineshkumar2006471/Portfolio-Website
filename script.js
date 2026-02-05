@@ -159,7 +159,8 @@ const initThreeJS = () => {
 
     // Simple ambient particles only (no sphere)
     const particlesGeometry = new THREE.BufferGeometry();
-    const particlesCount = 800;
+    const isMobile = window.innerWidth < 768;
+    const particlesCount = isMobile ? 300 : 800;
     const posArray = new Float32Array(particlesCount * 3);
 
     for (let i = 0; i < particlesCount * 3; i++) {
