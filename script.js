@@ -257,14 +257,18 @@ gsap.utils.toArray('.reveal-text').forEach(text => {
 });
 
 // Skill cards stagger
+// Skill cards stagger (Optimized for speed)
 gsap.from('.skill-card', {
-    scrollTrigger: { trigger: '.skills-grid', start: 'top 80%' },
-    y: 100,
+    scrollTrigger: {
+        trigger: '.skills-grid',
+        start: 'top 85%',
+        once: true // Animate only once for better performance
+    },
+    y: 30, // Reduced travel distance
     opacity: 0,
-    rotationX: -30,
-    duration: 0.8,
-    stagger: 0.15,
-    ease: 'back.out(1.4)'
+    duration: 0.5,
+    stagger: 0.08,
+    ease: 'power2.out'
 });
 
 // Section headers
