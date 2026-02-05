@@ -264,6 +264,20 @@ body {
     box-shadow: 0 10px 40px rgba(224, 255, 46, 0.3);
 }
 
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    z-index: 101;
+}
+
 /* ═══════════════════════════════════════════════════════════════════════════
    MAIN CONTENT
    ═══════════════════════════════════════════════════════════════════════════ */
@@ -530,6 +544,8 @@ ul {
     position: relative;
     overflow: hidden;
     transition: all var(--transition-liquid);
+    opacity: 0;
+    transform: translateY(20px);
 }
 
 .skill-card::before {
@@ -960,7 +976,32 @@ ul {
     }
 
     .nav-links {
-        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: var(--bg-void-light);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        transform: translateY(-100%);
+        transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+        z-index: 99;
+    }
+
+    .nav-links.active {
+        transform: translateY(0);
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .nav-link {
+        font-size: 2rem;
     }
 
     .about-grid {

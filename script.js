@@ -258,16 +258,16 @@ gsap.utils.toArray('.reveal-text').forEach(text => {
 
 // Skill cards stagger
 // Skill cards stagger (Optimized for speed)
-gsap.from('.skill-card', {
+gsap.to('.skill-card', {
     scrollTrigger: {
         trigger: '.skills-grid',
-        start: 'top 85%',
-        once: true // Animate only once for better performance
+        start: 'top bottom', // Start animation as soon as section enters viewport
+        toggleActions: 'play none none reverse'
     },
-    y: 30, // Reduced travel distance
-    opacity: 0,
-    duration: 0.5,
-    stagger: 0.08,
+    y: 0,
+    opacity: 1,
+    duration: 0.4,
+    stagger: 0.05,
     ease: 'power2.out'
 });
 
@@ -303,6 +303,36 @@ window.addEventListener('scroll', () => {
         nav.classList.remove('scrolled');
     }
 });
+
+// --- 10b. Mobile Menu Toggle ---
+const hamburger = document.querySelector('.hamburger');
+const navLinks = document.querySelector('.nav-links');
+const links = document.querySelectorAll('.nav-link');
+
+if (hamburger) {
+    hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        hamburger.classList.toggle('active');
+
+        // Icon toggle
+        const icon = hamburger.querySelector('i');
+        if (navLinks.classList.contains('active')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+        } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        }
+    });
+
+    links.forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            hamburger.querySelector('i').classList.remove('fa-times');
+            hamburger.querySelector('i').classList.add('fa-bars');
+        });
+    });
+}
 
 // --- 11. Barba.js Page Transitions ---
 if (window.location.protocol !== 'file:' && typeof barba !== 'undefined') {
